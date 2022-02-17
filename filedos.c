@@ -5,6 +5,6 @@ int main(int argc, char *argv[])
 	if (argc != 2)
 		return (0);
 	if (argc == 2)
-		printf("%s\n", argv[1]);
+		printf("This isn't DOS...\n");
 	return (0);
 }
