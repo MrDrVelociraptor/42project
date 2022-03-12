@@ -11,19 +11,33 @@
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "libft/libft.h"
+#include <stdlib.h>
+#include "libft.h"
+#include <stdbool.h>
 
-//This function stores errors in a .txt file if 
-//the main program encounters an error
-
-void	error(void)
+char	*company_name(int p)
 {
-	FILE	*error;
+	char	*fds[3];
+	char	*name;
+	char	*tmp;
 
-	error = fopen("./error.txt", "a");
-	if (error != NULL)
-		fprintf(error, "User entered incorrect input\n");
-	close(1);
+	fds[0] = "Fancy";
+	fds[1] = "Development";
+	fds[2] = "Services";
+	if (p == 1)
+	{
+		name = (char *)malloc(sizeof(char *));
+		name = ft_strcat(ft_substr((fds[0]), 0, 1), ft_substr((fds[1]), 0, 1));
+		name = ft_strcat(name, ft_substr((fds[2]), 0, 1));
+	}
+	else if (p == 0)
+	{
+		tmp = ft_strjoin(ft_substr((fds[0]), 0, ft_strlen(fds[0])), " ");
+		name = ft_strjoin(tmp, ft_substr(fds[1], 0, ft_strlen(fds[1])));
+		tmp = ft_strjoin(name, " ");
+		name = ft_strjoin(tmp, ft_substr(fds[2], 0, ft_strlen(fds[2])));
+	}
+	return (name);
 }
 
 //This function takes a user input with 'scanf' and the 
@@ -37,8 +51,8 @@ int	main(void)
 	char	*welcome;
 
 	i = 0;
-	welcome = "Welcome to FDS - ";
-	printf("Enter your name\n");
+	welcome = "Welcome to ";
+	printf("Enter your first name\n");
 	scanf("%s", name);
 	printf("The user input was - %s\n", name);
 	while (name[i])
@@ -50,10 +64,8 @@ int	main(void)
 			printf("Invalid name, only alphbetical characters accepted\n");
 			printf("Enter your name\n");
 			scanf("%s", name);
-			printf("%s\n", ft_strjoin(welcome, name));
-			error();
 		}
 	}
-	printf("%s\n", ft_strjoin(welcome, name));
+	printf("%s %s\n", ft_strjoin(welcome, company_name(0)), name);
 	return (0);
 }
